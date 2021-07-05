@@ -1,4 +1,4 @@
-# Kutuphane Sistemi:
+# Kutuphane Takip Sistemi:books:
 Spring Boot ve Katmanlı Mimari ile Kütüphane Takip Sistemi oluşturuldu.
 
 ### Teknolojiler

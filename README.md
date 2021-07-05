@@ -21,7 +21,8 @@ Sisteme kaydolan üyeler ve adminler, e-posta ve şifre ile sisteme giriş yapab
 Kabul Kriterleri:
 
 Üyenin kiralama yapabilmesi için seçilen kitabın başka kullanıcılar tarafından kirada olmaması gerekir.    
-
+#### ER Diyagramı
+![Veritabanına ait ER Diyagramı](https://github.com/java-heroes/Kutuphane_Sistemi/blob/main/ER.PNG)
 ---------------------------------------------------
 
 ### Takım Lideri

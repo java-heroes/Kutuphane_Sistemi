@@ -1,9 +1,7 @@
 # Kutuphane Sistemi:
  .... <br/>
+Spring Boot ve katmanlı mimari ile Kütüphane takip sistemi oluşturuldu.
 
-Getting Started
-
-....
 
 ### Teknolojiler
 - Java
@@ -11,9 +9,9 @@ Getting Started
 - PostgreSql
 
 ---------------------------------------------------
-Spring Boot ve katmanlı mimari ile Kütüphane takip sistemi oluşturuldu.
+
 Sisteme, üye ve kütüphane admini olmak üzere iki tür kullanıcı giriş yapabilir. 
-#### Req 1 : Üyeler sisteme kayıt olmalı.
+#### Req 1 : Üyeler ve Kütüphane adminleri sisteme kayıt olmalı.
  Kabul Kriterleri:
 
 Üye ve Kütüphane admini; ad, soyad, e-Posta, telefon, adres, şifre bilgilerini girerek sisteme kayıt olur.

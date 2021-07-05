@@ -1,13 +1,10 @@
 # Kutuphane Sistemi:
- .... <br/>
-Spring Boot ve katmanlı mimari ile Kütüphane takip sistemi oluşturuldu.
-
+Spring Boot ve Katmanlı Mimari ile Kütüphane Takip Sistemi oluşturuldu.
 
 ### Teknolojiler
 - Java
 - Spring Framework
 - PostgreSql
-
 ---------------------------------------------------
 
 Sisteme, üye ve kütüphane admini olmak üzere iki tür kullanıcı giriş yapabilir. 
@@ -25,8 +22,6 @@ Kabul Kriterleri:
 
 Üyenin kiralama yapabilmesi için seçilen kitabın başka kullanıcılar tarafından kirada olmaması gerekir.    
 
-#### ER Diyagramı
-![Veritabanına ait ER Diyagramı]()
 ---------------------------------------------------
 
 ### Takım Lideri

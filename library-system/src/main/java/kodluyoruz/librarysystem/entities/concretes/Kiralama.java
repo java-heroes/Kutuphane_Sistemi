@@ -31,7 +31,7 @@ public class Kiralama {
     private Date teslim_tarihi;
 
     @ManyToOne()
-    @JoinColumn(name="user_name")
+    @JoinColumn(name="userName")
     private Book books;
 
 }

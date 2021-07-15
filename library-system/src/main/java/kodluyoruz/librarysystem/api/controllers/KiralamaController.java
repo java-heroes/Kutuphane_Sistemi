@@ -24,7 +24,6 @@ public class KiralamaController {
         return ResponseEntity.ok(this.kiralamaService.getAll());
     }
 
-
     @PostMapping("/add")
     public ResponseEntity<?> add(@RequestBody Kiralama kiralama){
         this.kiralamaService.KiralamaYap(kiralama);

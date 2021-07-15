@@ -12,4 +12,5 @@ public interface BookDao extends JpaRepository<Book,Integer>{
 	List<Book> getByCategory_Id(int id);
 	List<Book> getByCategory_CategoryName(String categoryName);
 	List<Book> getByNameContains(String bookName);
+	
 }

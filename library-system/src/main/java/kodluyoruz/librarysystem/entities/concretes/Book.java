@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name="books")
@@ -44,5 +45,9 @@ public class Book {
 	@ManyToOne()
 	@JoinColumn(name="category_id")
 	Category category;
+
+	@ManyToOne()
+	@JoinColumn(name="writer_id")
+	Writer writer;
 	
 }

@@ -3,6 +3,7 @@ package kodluyoruz.librarysystem.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodluyoruz.librarysystem.business.abstracts.BookService;
@@ -46,6 +47,34 @@ public class BookManager implements BookService{
 	@Override
 	public void delete(Integer id) { 
 		bookDao.deleteById(id);	
+	}
+
+	@Override
+	public Book getByBookName(String productName) {
+		return bookDao.getByName(productName);
+		}
+
+	@Override
+	public List<Book> getByCategoryId(int id) {
+		
+		return bookDao.getByCategory_Id(id);
+	}
+
+	@Override
+	public List<Book> getByCategoryName(String name) {
+		return bookDao.getByCategory_CategoryName(name);
+	}
+
+	@Override
+	public List<Book> getByBookNameContains(String bookName) {
+		return bookDao.getByNameContains(bookName);
+	}
+
+	@Override
+	public List<Book> getAllSorted() {
+		Sort sort=Sort.by(Sort.Direction.ASC,"name");
+		
+		return bookDao.findAll(sort);
 	}
 
 }

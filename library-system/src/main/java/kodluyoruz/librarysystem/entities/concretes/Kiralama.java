@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.sql.Date;
 
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -31,7 +32,7 @@ public class Kiralama {
     private Date teslim_tarihi;
 
     @ManyToOne()
-    @JoinColumn(name="userName")
+    @JoinColumn(name="book_id")
     private Book books;
 
 }

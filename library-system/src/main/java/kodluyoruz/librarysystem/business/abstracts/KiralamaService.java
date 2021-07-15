@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface KiralamaService {
     public List<Kiralama> getAll();
-   public Kiralama getById(int id);
-  public   void addBook(Kiralama kiralama);
+   public Kiralama getById(Integer id);
+  public   void KiralamaYap(Kiralama kiralama);
     public void update(Kiralama kiralama);
    public void delete(Integer id);
 }

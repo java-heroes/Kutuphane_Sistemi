@@ -5,12 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","book"})
 @Table(name="rentals")
 public class Rental {
     @Id
@@ -26,6 +30,6 @@ public class Rental {
 
     @ManyToOne()
     @JoinColumn(name="book_id")
-    private Book books;
+    private Book book;
 
 }

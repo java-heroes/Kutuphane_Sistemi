@@ -23,7 +23,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 //@JsonIgnoreProperties({"hibernateLazyInitializer","handler","category"})
-public class Book {
+public class Book  {
+	
+	//private static final long serialVersionUID=1l;
+	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +43,7 @@ public class Book {
 	private int number_of_pages;
 	@Column(name="is_rent")
 	private boolean isRent;
-	
+	@JsonIgnoreProperties({"books"})
 	@ManyToOne()
 	@JoinColumn(name="category_id")
 	Category category;

@@ -7,7 +7,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodluyoruz.librarysystem.business.abstracts.CategoryService;
+import kodluyoruz.librarysystem.core.utilities.Business.BusinessRules;
+import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
+import kodluyoruz.librarysystem.core.utilities.Results.ErrorResult;
+import kodluyoruz.librarysystem.core.utilities.Results.Result;
+import kodluyoruz.librarysystem.core.utilities.Results.SuccessDataResult;
+import kodluyoruz.librarysystem.core.utilities.Results.SuccessResult;
 import kodluyoruz.librarysystem.dataAccess.abstracts.CategoryDao;
+import kodluyoruz.librarysystem.entities.concretes.Book;
 import kodluyoruz.librarysystem.entities.concretes.Category;
 @Service
 public class CategoryManager implements CategoryService{
@@ -20,34 +27,66 @@ public class CategoryManager implements CategoryService{
 	}
 
 	@Override
-	public List<Category> getAll() {
-		return categoryDao.findAll();
+	public DataResult<List<Category>> getAll() {
+		return new SuccessDataResult<List<Category>>(categoryDao.findAll());
 	}
 
 	@Override
-	public List<Category> getAllSorted() {
+	public DataResult<List<Category>> getAllSorted() {
 		Sort sort=Sort.by(Sort.Direction.ASC, "categoryName");
-		return categoryDao.findAll(sort);
+		return new SuccessDataResult<List<Category>>(categoryDao.findAll(sort));
 	}
 
 	@Override
-	public Category getById(int id) {
-		return categoryDao.getById(id);
+	public DataResult<Category> getById(int id) {
+		return new SuccessDataResult<Category>(categoryDao.getById(id));
 	}
 
 	@Override
-	public void add(Category category) {
+	public Result add(Category category) {
+		Result result=BusinessRules.Run(CheckIfNameExist(category.getCategoryName()),
+				NullControl(category));
+		if(result!=null) {
+			return result;
+		}
 		categoryDao.save(category);
+		return new SuccessResult(category.getCategoryName()+" category successfully added.");
 	}
 
 	@Override
-	public void update(Category category) {
+	public Result update(Category category) {
+		Result result=BusinessRules.Run(CheckIfNameExist(category.getCategoryName()),
+				NullControl(category));
+		if(result!=null) {
+			return result;
+		}
 		categoryDao.save(category);
+		return new SuccessResult(category.getCategoryName()+" category successfully updated.");
 	}
 
 	@Override
-	public void delete(Category id) {
-		categoryDao.delete(id);
+	public Result delete(Integer id) {
+		String cName=categoryDao.findById(id).get().getCategoryName();
+		categoryDao.deleteById(id);
+		return new SuccessResult(cName+" silindi.");
+		
+	}
+	public Result CheckIfNameExist(String name) {
+		List<Category> categories=categoryDao.findAll();
+		for(Category category:categories) {
+			if(category.getCategoryName().equals(name)) {
+				return new ErrorResult("This category is already exist!");
+			}
+		}
+		return new SuccessResult();
+	}
+	public Result NullControl(Category category) {
+		if(category.getCategoryName()==null)
+		{
+			return new ErrorResult("Category name can not be empty!");
+		}
+		return new SuccessResult();
+		
 	}
 
 }

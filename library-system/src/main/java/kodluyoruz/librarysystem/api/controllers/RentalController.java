@@ -1,37 +1,36 @@
 package kodluyoruz.librarysystem.api.controllers;
 
-
-import kodluyoruz.librarysystem.business.abstracts.KiralamaService;
-
-import kodluyoruz.librarysystem.entities.concretes.Kiralama;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import kodluyoruz.librarysystem.business.abstracts.RentalService;
+import kodluyoruz.librarysystem.entities.concretes.Rental;
+
 @RestController
 @RequestMapping("/rent")
-public class KiralamaController {
-    private KiralamaService kiralamaService;
+public class RentalController {
+    private RentalService rentalService;
 
     @Autowired
-    public KiralamaController(KiralamaService kiralamaService) {
-        this.kiralamaService = kiralamaService;
+    public RentalController(RentalService rentalService) {
+        this.rentalService = rentalService;
     }
 
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getAll(){
-        return ResponseEntity.ok(this.kiralamaService.getAll());
+        return ResponseEntity.ok(this.rentalService.getAll());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Kiralama kiralama){
-        this.kiralamaService.KiralamaYap(kiralama);
+    public ResponseEntity<?> add(@RequestBody Rental rental){
+        this.rentalService.add(rental);
         return ResponseEntity.ok("Kiralama yapilmis");
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable int id){
-        this.kiralamaService.delete(id);
+        this.rentalService.delete(id);
         return ResponseEntity.ok("Kiralama iptal edilmis");
     }
 

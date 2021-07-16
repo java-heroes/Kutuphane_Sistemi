@@ -5,33 +5,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="kiralama")
-public class Kiralama {
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","book"})
+@Table(name="rentals")
+public class Rental {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="user_name")
-    private Integer  kullanici_Adi;
-
-    @Column(name="book_name")
-    private Integer  kitap_adi;
-
-    @Column(name="receive_name")
+    @Column(name="receive_date")
     private Date alis_tarih;
 
     @Column(name="delivery_date")
     private Date teslim_tarihi;
 
     @ManyToOne()
-    @JoinColumn(name="userName")
-    private Book books;
+    @JoinColumn(name="book_id")
+    private Book book;
 
 }

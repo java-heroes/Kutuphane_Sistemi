@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","category"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","books"})
 public class Writer {
     @Id
     @Column(name="id")
@@ -30,7 +30,7 @@ public class Writer {
     private String surname;
 
     @OneToMany(mappedBy="writer")
-    private List<Book> writers;
+    private List<Book> books;
 
 
 }

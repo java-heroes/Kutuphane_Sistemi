@@ -1,17 +1,22 @@
 package kodluyoruz.librarysystem.api.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodluyoruz.librarysystem.business.abstracts.BookService;
+import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
+import kodluyoruz.librarysystem.core.utilities.Results.Result;
 import kodluyoruz.librarysystem.entities.concretes.Book;
 
 @RestController
@@ -24,40 +29,48 @@ public BookController(BookService bookService) {
 	this.bookService = bookService;
 }
 @GetMapping("/getall")
-public ResponseEntity<?> getAll(){
-	  return ResponseEntity.ok(this.bookService.getAll());
+public DataResult<List<Book>> getAll(){
+	  return this.bookService.getAll();
+}
+@GetMapping("/getbyid")
+public DataResult<Book> getById(int id){
+	  return this.bookService.getById(id);
 }
 @GetMapping("/getallsorted")
-public ResponseEntity<?> getAllSorted(){
-	  return ResponseEntity.ok(this.bookService.getAllSorted());
+public DataResult<List<Book>> getAllSorted(){
+	  return this.bookService.getAllSorted();
 }
 @GetMapping("/getbybookname")
-public ResponseEntity<?> getByBookName(@RequestParam String bookName){
-	  return ResponseEntity.ok(this.bookService.getByBookName(bookName));
+public DataResult<Book> getByBookName(@RequestParam String bookName){
+	  return this.bookService.getByBookName(bookName);
 }
 @GetMapping("/getbycategoryid")
-public ResponseEntity<?> getByCategoryId(@RequestParam Integer id){
+public DataResult<List<Book>> getByCategoryId(@RequestParam Integer id){
 	System.out.println(id);
-	  return ResponseEntity.ok(this.bookService.getByCategoryId(id));
+	  return this.bookService.getByCategoryId(id);
 }
 @GetMapping("/getbycategoryname")
-public ResponseEntity<?> getByCategoryName(@RequestParam String name){
+public DataResult<List<Book>> getByCategoryName(@RequestParam String name){
 	//System.out.println(id);
-	  return ResponseEntity.ok(this.bookService.getByCategoryName(name));
+	  return this.bookService.getByCategoryName(name);
 }
 @GetMapping("/getbybooknamecontains")
-public ResponseEntity<?> getByBookNameContains(@RequestParam String name){
+public DataResult<List<Book>> getByBookNameContains(@RequestParam String name){
 	//System.out.println(id);
-	  return ResponseEntity.ok(this.bookService.getByBookNameContains(name));
+	  return this.bookService.getByBookNameContains(name);
 }
 @PostMapping("/add")
-public ResponseEntity<?> add(@RequestBody Book book){
-	this.bookService.addBook(book);
-	  return ResponseEntity.ok("kitap eklendi");
+public Result add(@RequestBody Book book){
+  return this.bookService.addBook(book);
+}
+@PutMapping("/update")
+public Result update(@RequestBody Book book){
+  return this.bookService.update(book);
 }
 @DeleteMapping("/delete/{id}")
-public ResponseEntity<?> delete(@PathVariable int id){
-	this.bookService.delete(id);
-	return ResponseEntity.ok("kitap silindi");
+public Result delete(@PathVariable int id){
+	return this.bookService.delete(id);
+	
 }
+
 }

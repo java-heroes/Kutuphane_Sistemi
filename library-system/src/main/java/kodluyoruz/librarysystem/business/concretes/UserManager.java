@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Service(value = "userService")
 public class UserManager implements UserDetailsService, UserService {
 
@@ -34,7 +35,7 @@ public class UserManager implements UserDetailsService, UserService {
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username);
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
@@ -69,7 +70,7 @@ public class UserManager implements UserDetailsService, UserService {
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role);
 
-        if(nUser.getEmail().split("@")[1].equals("admin.edu")){
+        if (nUser.getEmail().split("@")[1].equals("admin.edu")) {
             role = roleService.findByName("ADMIN");
             roleSet.add(role);
         }

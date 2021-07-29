@@ -45,22 +45,21 @@ public class UserController {
         return ResponseEntity.ok(new AuthToken(token));
     }
 
-    @RequestMapping(value="/register", method = RequestMethod.POST)
-    public User saveUser(@RequestBody UserDto user){
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public User saveUser(@RequestBody UserDto user) {
         return userService.save(user);
     }
 
 
-
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value="/adminping", method = RequestMethod.GET)
-    public String adminPing(){
+    @RequestMapping(value = "/adminping", method = RequestMethod.GET)
+    public String adminPing() {
         return "Only Admins Can Read This";
     }
 
     @PreAuthorize("hasRole('USER')")
-    @RequestMapping(value="/userping", method = RequestMethod.GET)
-    public String userPing(){
+    @RequestMapping(value = "/userping", method = RequestMethod.GET)
+    public String userPing() {
         return "Any User Can Read This";
     }
 

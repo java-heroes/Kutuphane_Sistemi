@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import kodluyoruz.librarysystem.business.abstracts.RoleService;
 import kodluyoruz.librarysystem.dataAccess.abstracts.RoleDao;
 import kodluyoruz.librarysystem.entities.concretes.Role;
+
 @Service(value = "roleService")
 public class RoleManager implements RoleService {
 

@@ -12,24 +12,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="writers")
+@Table(name = "writers")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","books"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "books"})
 public class Writer {
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="surname")
+    @Column(name = "surname")
     private String surname;
 
-    @OneToMany(mappedBy="writer")
+    @OneToMany(mappedBy = "writer")
     private List<Book> books;
 
 

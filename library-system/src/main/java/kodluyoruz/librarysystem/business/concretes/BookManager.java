@@ -17,98 +17,101 @@ import kodluyoruz.librarysystem.dataAccess.abstracts.BookDao;
 import kodluyoruz.librarysystem.entities.concretes.Book;
 
 @Service
-public class BookManager implements BookService{
+public class BookManager implements BookService {
 
-	private BookDao bookDao;
-	@Autowired
-	public BookManager(BookDao bookDao) {
-		super();
-		this.bookDao = bookDao;
-	}
+    private BookDao bookDao;
 
-	@Override
-	public DataResult<List<Book>> getAll() {
-		// TODO Auto-generated method stub
-		return new SuccessDataResult<List<Book>>(bookDao.findAll(),"Kitaplar listelendi") ;
-	}
+    @Autowired
+    public BookManager(BookDao bookDao) {
+        super();
+        this.bookDao = bookDao;
+    }
 
-	@Override
-	public Result addBook(Book book) {
-		Result result=BusinessRules.Run(NullControl(book),
-				CheckIfNameExist(book.getName()));
-		if(result!=null) {
-			return result;
-		}
-		bookDao.save(book);
-	    return new SuccessResult("Book added successfully.");
-	}
+    @Override
+    public DataResult<List<Book>> getAll() {
+        // TODO Auto-generated method stub
+        return new SuccessDataResult<List<Book>>(bookDao.findAll(), "Kitaplar listelendi");
+    }
 
-	@Override
-	public Result update(Book book) {
-		bookDao.save(book);
-		 return new SuccessResult("Kitap guncellendi.");
-	}
+    @Override
+    public Result addBook(Book book) {
+        Result result = BusinessRules.Run(NullControl(book),
+                CheckIfNameExist(book.getName()));
+        if (result != null) {
+            return result;
+        }
+        bookDao.save(book);
+        return new SuccessResult("Book added successfully.");
+    }
 
-	@Override
-	public Result delete(Integer id) { 
-		String book=bookDao.getById(id).getName();
-		bookDao.deleteById(id);	
-		return new SuccessResult(book+" kitabı silindi.");
-	}
+    @Override
+    public Result update(Book book) {
+        bookDao.save(book);
+        return new SuccessResult("Kitap guncellendi.");
+    }
 
-	@Override
-	public DataResult<Book> getByBookName(String productName) {
-		return new SuccessDataResult<Book>(bookDao.getByName(productName));
-		}
+    @Override
+    public Result delete(Integer id) {
+        String book = bookDao.getById(id).getName();
+        bookDao.deleteById(id);
+        return new SuccessResult(book + " kitabı silindi.");
+    }
 
-	@Override
-	public DataResult<List<Book>> getByCategoryId(int id) {
-		
-		return new SuccessDataResult<List<Book>>(bookDao.getByCategory_Id(id));
-	}
+    @Override
+    public DataResult<Book> getByBookName(String productName) {
+        return new SuccessDataResult<Book>(bookDao.getByName(productName));
+    }
 
-	@Override
-	public DataResult<List<Book>> getByCategoryName(String name) {
-		return new SuccessDataResult<List<Book>> (bookDao.getByCategory_CategoryName(name),name+"'e ait kitap listesi:");
-	}
+    @Override
+    public DataResult<List<Book>> getByCategoryId(int id) {
 
-	@Override
-	public DataResult<List<Book>> getByBookNameContains(String bookName) {
-		return new SuccessDataResult<List<Book>>(bookDao.getByNameContains(bookName));
-	}
+        return new SuccessDataResult<List<Book>>(bookDao.getByCategory_Id(id));
+    }
 
-	@Override
-	public DataResult<List<Book>> getAllSorted() {
-		Sort sort=Sort.by(Sort.Direction.ASC,"name");
-		
-		return new SuccessDataResult<List<Book>>(bookDao.findAll(sort),"Alfabeye göre sıralama yapıldı.");
-	}
+    @Override
+    public DataResult<List<Book>> getByCategoryName(String name) {
+        return new SuccessDataResult<List<Book>>(bookDao.getByCategory_CategoryName(name), name + "'e ait kitap listesi:");
+    }
 
-	@Override
-	public DataResult<Book> getById(int id) {
-		return new SuccessDataResult<Book>(bookDao.getById(id));
-	}
-	public Result NullControl(Book book) {
-		if(book.getName()==null
-				||book.getNumber_of_pages()==0
-				||book.getPublishDate()==null
-				||book.getBarcode_no()==0
-				||book.getDescription()==null
-				||book.getCategory().getId()==0) {
-			return new ErrorResult("Please fill all the field!");
-		}
-		return new SuccessResult();
-		
-	}
-	public Result CheckIfNameExist(String name) {
-		List<Book> books=bookDao.findAll();
-		for(Book book:books) {
-			if(book.getName().equals(name)) {
-				return new ErrorResult("This book is already exist!");
-			}
-		}
-		return new SuccessResult();
-	}
-	
+    @Override
+    public DataResult<List<Book>> getByBookNameContains(String bookName) {
+        return new SuccessDataResult<List<Book>>(bookDao.getByNameContains(bookName));
+    }
+
+    @Override
+    public DataResult<List<Book>> getAllSorted() {
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+
+        return new SuccessDataResult<List<Book>>(bookDao.findAll(sort), "Alfabeye göre sıralama yapıldı.");
+    }
+
+    @Override
+    public DataResult<Book> getById(int id) {
+        return new SuccessDataResult<Book>(bookDao.getById(id));
+    }
+
+    public Result NullControl(Book book) {
+        if (book.getName() == null
+                || book.getNumber_of_pages() == 0
+                || book.getPublishDate() == null
+                || book.getBarcode_no() == 0
+                || book.getDescription() == null
+                || book.getCategory().getId() == 0) {
+            return new ErrorResult("Please fill all the field!");
+        }
+        return new SuccessResult();
+
+    }
+
+    public Result CheckIfNameExist(String name) {
+        List<Book> books = bookDao.findAll();
+        for (Book book : books) {
+            if (book.getName().equals(name)) {
+                return new ErrorResult("This book is already exist!");
+            }
+        }
+        return new SuccessResult();
+    }
+
 
 }

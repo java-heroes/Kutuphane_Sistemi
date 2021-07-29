@@ -22,55 +22,66 @@ import kodluyoruz.librarysystem.entities.concretes.Book;
 @RestController
 @RequestMapping("/books")
 public class BookController {
-   private BookService bookService;
-@Autowired
-public BookController(BookService bookService) {
-	super();
-	this.bookService = bookService;
-}
-@GetMapping("/getall")
-public DataResult<List<Book>> getAll(){
-	  return this.bookService.getAll();
-}
-@GetMapping("/getbyid")
-public DataResult<Book> getById(int id){
-	  return this.bookService.getById(id);
-}
-@GetMapping("/getallsorted")
-public DataResult<List<Book>> getAllSorted(){
-	  return this.bookService.getAllSorted();
-}
-@GetMapping("/getbybookname")
-public DataResult<Book> getByBookName(@RequestParam String bookName){
-	  return this.bookService.getByBookName(bookName);
-}
-@GetMapping("/getbycategoryid")
-public DataResult<List<Book>> getByCategoryId(@RequestParam Integer id){
-	System.out.println(id);
-	  return this.bookService.getByCategoryId(id);
-}
-@GetMapping("/getbycategoryname")
-public DataResult<List<Book>> getByCategoryName(@RequestParam String name){
-	//System.out.println(id);
-	  return this.bookService.getByCategoryName(name);
-}
-@GetMapping("/getbybooknamecontains")
-public DataResult<List<Book>> getByBookNameContains(@RequestParam String name){
-	//System.out.println(id);
-	  return this.bookService.getByBookNameContains(name);
-}
-@PostMapping("/add")
-public Result add(@RequestBody Book book){
-  return this.bookService.addBook(book);
-}
-@PutMapping("/update")
-public Result update(@RequestBody Book book){
-  return this.bookService.update(book);
-}
-@DeleteMapping("/delete/{id}")
-public Result delete(@PathVariable int id){
-	return this.bookService.delete(id);
-	
-}
+    private BookService bookService;
+
+    @Autowired
+    public BookController(BookService bookService) {
+        super();
+        this.bookService = bookService;
+    }
+
+    @GetMapping("/getall")
+    public DataResult<List<Book>> getAll() {
+        return this.bookService.getAll();
+    }
+
+    @GetMapping("/getbyid")
+    public DataResult<Book> getById(int id) {
+        return this.bookService.getById(id);
+    }
+
+    @GetMapping("/getallsorted")
+    public DataResult<List<Book>> getAllSorted() {
+        return this.bookService.getAllSorted();
+    }
+
+    @GetMapping("/getbybookname")
+    public DataResult<Book> getByBookName(@RequestParam String bookName) {
+        return this.bookService.getByBookName(bookName);
+    }
+
+    @GetMapping("/getbycategoryid")
+    public DataResult<List<Book>> getByCategoryId(@RequestParam Integer id) {
+        System.out.println(id);
+        return this.bookService.getByCategoryId(id);
+    }
+
+    @GetMapping("/getbycategoryname")
+    public DataResult<List<Book>> getByCategoryName(@RequestParam String name) {
+        //System.out.println(id);
+        return this.bookService.getByCategoryName(name);
+    }
+
+    @GetMapping("/getbybooknamecontains")
+    public DataResult<List<Book>> getByBookNameContains(@RequestParam String name) {
+        //System.out.println(id);
+        return this.bookService.getByBookNameContains(name);
+    }
+
+    @PostMapping("/add")
+    public Result add(@RequestBody Book book) {
+        return this.bookService.addBook(book);
+    }
+
+    @PutMapping("/update")
+    public Result update(@RequestBody Book book) {
+        return this.bookService.update(book);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Result delete(@PathVariable int id) {
+        return this.bookService.delete(id);
+
+    }
 
 }

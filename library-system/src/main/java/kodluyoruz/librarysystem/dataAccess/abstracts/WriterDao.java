@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kodluyoruz.librarysystem.entities.concretes.Writer;
 
-public interface WriterDao extends JpaRepository<Writer,Integer> {
+public interface WriterDao extends JpaRepository<Writer, Integer> {
     Writer getByName(String writerName);
 
-    Writer getById(int id);
+    List<Writer> getById(int id);
 
     void deleteById(Integer id);
 }

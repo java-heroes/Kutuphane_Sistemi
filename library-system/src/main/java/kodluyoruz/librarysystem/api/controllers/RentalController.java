@@ -1,5 +1,8 @@
 package kodluyoruz.librarysystem.api.controllers;
 
+import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
+import kodluyoruz.librarysystem.core.utilities.Results.Result;
+import kodluyoruz.librarysystem.core.utilities.Results.SuccessResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,20 +22,20 @@ public class RentalController {
 
 
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(this.rentalService.getAll());
+    public DataResult<?> getAll() {
+        return this.rentalService.getAll();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Rental rental) {
-        this.rentalService.add(rental);
-        return ResponseEntity.ok("Kiralama yapilmis");
+    public Result add(@RequestBody Rental rental) {
+       return this.rentalService.add(rental);
+
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable int id) {
-        this.rentalService.delete(id);
-        return ResponseEntity.ok("Kiralama iptal edilmis");
+    public Result delete(@PathVariable int id) {
+       return this.rentalService.delete(id);
+
     }
 
 }

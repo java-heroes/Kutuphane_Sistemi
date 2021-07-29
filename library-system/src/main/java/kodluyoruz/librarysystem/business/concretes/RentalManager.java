@@ -2,10 +2,7 @@ package kodluyoruz.librarysystem.business.concretes;
 
 import kodluyoruz.librarysystem.business.abstracts.RentalService;
 import kodluyoruz.librarysystem.core.exceptions.IdNotFoundException;
-import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
-import kodluyoruz.librarysystem.core.utilities.Results.Result;
-import kodluyoruz.librarysystem.core.utilities.Results.SuccessDataResult;
-import kodluyoruz.librarysystem.core.utilities.Results.SuccessResult;
+import kodluyoruz.librarysystem.core.utilities.Results.*;
 import kodluyoruz.librarysystem.dataAccess.abstracts.RentalDao;
 import kodluyoruz.librarysystem.entities.concretes.Rental;
 
@@ -40,8 +37,11 @@ public class RentalManager implements RentalService {
 
     @Override
     public Result add(Rental rental) {
+        if(!rental.getBook().isRent()){
         rentalDao.save(rental);
-        return new SuccessResult("");
+        return new SuccessResult("Rental Is Made Successfully");}
+        else
+            return new ErrorResult("Rental Already Exist!");
     }
 
     @Override

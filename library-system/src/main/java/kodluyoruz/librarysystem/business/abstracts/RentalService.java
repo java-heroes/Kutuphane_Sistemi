@@ -8,8 +8,12 @@ import java.util.List;
 
 public interface RentalService {
     DataResult<List<Rental>> getAll();
+
     DataResult<Rental> getById(Integer id);
+
     Result add(Rental rental);
+
     Result update(Rental rental);
+
     Result delete(Integer id);
 }

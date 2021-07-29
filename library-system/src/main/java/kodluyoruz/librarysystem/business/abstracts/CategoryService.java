@@ -9,10 +9,15 @@ import kodluyoruz.librarysystem.entities.concretes.Category;
 
 public interface CategoryService {
 
-	  DataResult<List<Category>> getAll();
-	  DataResult<List<Category>> getAllSorted();
-	  DataResult<Category> getById(int id);
-	  Result add(Category category);
-	  Result update(Category category);
-	  Result delete(Integer id);
+    DataResult<List<Category>> getAll();
+
+    DataResult<List<Category>> getAllSorted();
+
+    DataResult<Category> getById(int id);
+
+    Result add(Category category);
+
+    Result update(Category category);
+
+    Result delete(Integer id);
 }

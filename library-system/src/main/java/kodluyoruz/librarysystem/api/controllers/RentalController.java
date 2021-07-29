@@ -19,17 +19,18 @@ public class RentalController {
 
 
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(this.rentalService.getAll());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Rental rental){
+    public ResponseEntity<?> add(@RequestBody Rental rental) {
         this.rentalService.add(rental);
         return ResponseEntity.ok("Kiralama yapilmis");
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable int id){
+    public ResponseEntity<?> delete(@PathVariable int id) {
         this.rentalService.delete(id);
         return ResponseEntity.ok("Kiralama iptal edilmis");
     }

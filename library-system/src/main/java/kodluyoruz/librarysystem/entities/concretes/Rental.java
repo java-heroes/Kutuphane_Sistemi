@@ -15,21 +15,21 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 //@JsonIgnoreProperties({"hibernateLazyInitializer","handler","book"})
-@Table(name="rentals")
+@Table(name = "rentals")
 public class Rental {
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="receive_date")
+    @Column(name = "receive_date")
     private Date alis_tarih;
 
-    @Column(name="delivery_date")
+    @Column(name = "delivery_date")
     private Date teslim_tarihi;
 
     @ManyToOne()
-    @JoinColumn(name="book_id")
+    @JoinColumn(name = "book_id")
     private Book book;
 
 }

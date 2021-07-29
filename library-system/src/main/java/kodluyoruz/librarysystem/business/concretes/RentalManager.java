@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class RentalManager implements RentalService {
     private RentalDao rentalDao;
+
     @Autowired
     public RentalManager(RentalDao rentalDao) {
         super();
@@ -30,9 +32,9 @@ public class RentalManager implements RentalService {
 
     @Override
     public DataResult<Rental> getById(Integer id) {
-        if(id!=null){
-        return new SuccessDataResult<Rental>(rentalDao.getById(id));}
-        else
+        if (id != null) {
+            return new SuccessDataResult<Rental>(rentalDao.getById(id));
+        } else
             throw new IdNotFoundException(id);
     }
 
@@ -50,7 +52,7 @@ public class RentalManager implements RentalService {
 
     @Override
     public Result delete(Integer id) {
-    	rentalDao.deleteById(id);
+        rentalDao.deleteById(id);
         return new SuccessResult("Rental deleted.");
     }
 }

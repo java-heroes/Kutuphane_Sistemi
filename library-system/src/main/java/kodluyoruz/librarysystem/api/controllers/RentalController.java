@@ -38,4 +38,8 @@ public class RentalController {
 
     }
 
+    @GetMapping("/getUserRentals/{id}")
+    public DataResult<?> getRentalByUserId(@PathVariable int id) {
+        return this.rentalService.getByUserId(id);
+    }
 }

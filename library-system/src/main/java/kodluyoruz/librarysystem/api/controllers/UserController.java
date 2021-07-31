@@ -1,5 +1,7 @@
 package kodluyoruz.librarysystem.api.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 import kodluyoruz.librarysystem.business.abstracts.UserService;
 import kodluyoruz.librarysystem.config.TokenProvider;
+import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
+import kodluyoruz.librarysystem.core.utilities.Results.Result;
+import kodluyoruz.librarysystem.core.utilities.Results.SuccessDataResult;
+import kodluyoruz.librarysystem.entities.concretes.Book;
 import kodluyoruz.librarysystem.entities.concretes.User;
 import kodluyoruz.librarysystem.entities.dtos.AuthToken;
 import kodluyoruz.librarysystem.entities.dtos.LoginUser;
@@ -63,4 +69,15 @@ public class UserController {
         return "Any User Can Read This";
     }
 
+    //@PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/update")
+    public Result update(@RequestBody UserDto user) {
+        return this.userService.update(user);
+    }
+    
+    @GetMapping("/getAll")
+    public DataResult<List<User>> getAll() {
+    	return new SuccessDataResult<List<User>>(this.userService.findAll());
+    }
+    
 }

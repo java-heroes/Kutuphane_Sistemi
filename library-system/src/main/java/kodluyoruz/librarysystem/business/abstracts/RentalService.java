@@ -16,4 +16,6 @@ public interface RentalService {
     Result update(Rental rental);
 
     Result delete(Integer id);
+    
+    DataResult<List<Rental>> getByUserId(int userId);
 }

@@ -5,12 +5,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 import org.springframework.stereotype.Service;
 
 import kodluyoruz.librarysystem.business.abstracts.RoleService;
 import kodluyoruz.librarysystem.business.abstracts.UserService;
+<<<<<<< HEAD
 import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
 import kodluyoruz.librarysystem.core.utilities.Results.SuccessDataResult;
+=======
+import kodluyoruz.librarysystem.core.utilities.Results.Result;
+import kodluyoruz.librarysystem.core.utilities.Results.SuccessResult;
+>>>>>>> 0c5ff147c80b8dab99d581804345fd061ac9f261
 import kodluyoruz.librarysystem.dataAccess.abstracts.UserDao;
 import kodluyoruz.librarysystem.entities.concretes.Role;
 import kodluyoruz.librarysystem.entities.concretes.User;
@@ -31,7 +37,7 @@ public class UserManager implements UserDetailsService, UserService {
 
     @Autowired
     private UserDao userDao;
-
+    
     @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
 
@@ -80,4 +86,24 @@ public class UserManager implements UserDetailsService, UserService {
         nUser.setRoles(roleSet);
         return new SuccessDataResult<User>(userDao.save(nUser));
     }
+
+	@Override
+	public Result update(UserDto user) {
+		
+		User dtoUser = user.getUserFromDto();
+		dtoUser.setUsername(user.getUsername());
+		dtoUser.setEmail(user.getEmail());
+		dtoUser.setName(user.getName());
+		dtoUser.setPassword(user.getPassword());
+		dtoUser.setPhone(user.getPhone());
+		this.userDao.save(dtoUser);
+		
+		return new SuccessResult("Kullanıcı başarıyla güncellendi");
+	}
+
+	@Override
+	public Result delete(UserDto user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

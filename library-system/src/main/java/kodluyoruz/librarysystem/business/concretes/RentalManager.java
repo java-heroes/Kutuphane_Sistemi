@@ -55,4 +55,10 @@ public class RentalManager implements RentalService {
         rentalDao.deleteById(id);
         return new SuccessResult("Rental deleted.");
     }
+
+
+	@Override
+	public DataResult<List<Rental>> getByUserId(int userId) {		
+		return new SuccessDataResult<List<Rental>>(rentalDao.getByUser_Id(userId), "Listeleme başarılı");
+	}
 }

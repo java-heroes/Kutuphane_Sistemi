@@ -1,6 +1,12 @@
 package kodluyoruz.librarysystem.api.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,10 +14,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import kodluyoruz.librarysystem.business.abstracts.UserService;
 import kodluyoruz.librarysystem.config.TokenProvider;
+import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
+import kodluyoruz.librarysystem.core.utilities.Results.ErrorDataResult;
 import kodluyoruz.librarysystem.entities.concretes.User;
 import kodluyoruz.librarysystem.entities.dtos.AuthToken;
 import kodluyoruz.librarysystem.entities.dtos.LoginUser;
@@ -46,7 +56,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public User saveUser(@RequestBody UserDto user) {
+    public DataResult<User> saveUser(@Valid @RequestBody UserDto user) {
         return userService.save(user);
     }
 
@@ -63,4 +73,15 @@ public class UserController {
         return "Any User Can Read This";
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object>handleValidationException(MethodArgumentNotValidException exceptions){
+    	Map<String,String> validationErrors=new HashMap<String,String>();
+        for(FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
+        	validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+        	
+        }
+      ErrorDataResult<Object> errors=new ErrorDataResult<Object>(validationErrors,"Validations errors");
+      return errors;
+    }
 }

@@ -12,6 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,19 +35,31 @@ import lombok.NoArgsConstructor;
 public class Book {
 
     //private static final long serialVersionUID=1l;
-
+    
+	//validation için,   
+	//@Size(min=2, max=30)
+	 //@Email
+	 //   @NotNull
+	 //   @NotBlank
+	//@Pattern(regexp ="[0-9\\s]{12}") telefon için kullan
+	
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "book_name")
+    @NotNull
+    @NotBlank
+    @Size(min=2, max=30)
     private String name;
     @Column(name = "description")
     private String description;
     @Column(name = "barcode_no")
+    @NotNull
     private int barcode_no;
     @Column(name = "publish_date")
     private Date publishDate;
+    @Min(value = 50,message="kitap sayfası 50 den az olamaz.")
     @Column(name = "number_of_pages")
     private int number_of_pages;
     @Column(name = "is_rent")

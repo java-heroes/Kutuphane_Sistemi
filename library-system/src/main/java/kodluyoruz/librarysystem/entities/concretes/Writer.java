@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,6 +27,7 @@ public class Writer {
     private Integer id;
 
     @Column(name = "name")
+  
     private String name;
 
     @Column(name = "surname")

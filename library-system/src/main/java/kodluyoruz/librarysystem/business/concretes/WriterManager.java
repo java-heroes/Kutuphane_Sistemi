@@ -35,7 +35,7 @@ public class WriterManager implements WriterService {
 
     @Override
     public Result addWriter(Writer writer) {
-        Result result = BusinessRules.Run(NullControl(writer),
+        Result result = BusinessRules.Run(
                 CheckIfNameExist(writer.getName()));
         if (result != null) {
             return result;

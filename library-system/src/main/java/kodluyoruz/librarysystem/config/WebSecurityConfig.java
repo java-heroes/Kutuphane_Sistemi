@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/rent/*" ,
                         "/categories/*",
                         "/writers/*").permitAll()
-                .antMatchers("/books/add*").hasRole("ADMIN")
+                //.antMatchers("/books/add*").hasRole("ADMIN")
     			//.antMatchers("/books/*").hasRole("USER")
     			
                 .antMatchers("/v2/api-docs",

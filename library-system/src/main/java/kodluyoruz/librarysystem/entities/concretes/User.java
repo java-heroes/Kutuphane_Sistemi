@@ -13,6 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,9 +42,11 @@ public class User {
     @JsonIgnore
     private String password;
 
+   
     @Column(name = "email")
     private String email;
 
+    
     @Column(name = "phone")
     private String phone;
 

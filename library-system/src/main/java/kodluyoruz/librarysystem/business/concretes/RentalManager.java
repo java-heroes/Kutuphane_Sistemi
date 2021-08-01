@@ -2,7 +2,9 @@ package kodluyoruz.librarysystem.business.concretes;
 
 import kodluyoruz.librarysystem.business.abstracts.RentalService;
 import kodluyoruz.librarysystem.core.exceptions.IdNotFoundException;
+import kodluyoruz.librarysystem.core.utilities.Business.BusinessRules;
 import kodluyoruz.librarysystem.core.utilities.Results.*;
+import kodluyoruz.librarysystem.dataAccess.abstracts.BookDao;
 import kodluyoruz.librarysystem.dataAccess.abstracts.RentalDao;
 import kodluyoruz.librarysystem.entities.concretes.Rental;
 
@@ -14,11 +16,12 @@ import java.util.List;
 @Service
 public class RentalManager implements RentalService {
     private RentalDao rentalDao;
-
+    private BookDao bookDao;
     @Autowired
-    public RentalManager(RentalDao rentalDao) {
+    public RentalManager(RentalDao rentalDao,BookDao bookDao) {
         super();
         this.rentalDao = rentalDao;
+        this.bookDao=bookDao;
     }
 
 
@@ -37,11 +40,20 @@ public class RentalManager implements RentalService {
 
     @Override
     public Result add(Rental rental) {
-        if(!rental.getBook().isRent()){
-        rentalDao.save(rental);
-        return new SuccessResult("Rental Is Made Successfully");}
-        else
+
+    	int book_id=rental.getBook().getId();
+        if(!this.bookDao.findById(book_id).get().isRent())
+        {    
+        	//System.out.println("burayaaaa baaaakkkk"+rental.getBook().getName());
+        	rentalDao.save(rental);
+        	this.bookDao.findById(book_id).get().setRent(true);
+        	this.bookDao.findById(book_id).get().setRentNum(this.bookDao.findById(book_id).get().getRentNum()+1);
+        	bookDao.save(this.bookDao.findById(book_id).get());
+        return new SuccessResult("Rental Is Made Successfully");
+        }
+        else {
             return new ErrorResult("Rental Already Exist!");
+        }
     }
 
     @Override
@@ -58,7 +70,25 @@ public class RentalManager implements RentalService {
 
 
 	@Override
-	public DataResult<List<Rental>> getByUserId(int userId) {		
-		return new SuccessDataResult<List<Rental>>(rentalDao.getByUser_Id(userId), "Listeleme başarılı");
+	public DataResult<List<Rental>> getByUserId(Integer id) {		
+		return new SuccessDataResult<List<Rental>>(this.rentalDao.getByUser_Id(id), "Listeleme başarılı");
 	}
+	
+	/*public Result IsRentable(Rental rental,int id){
+        
+             List<Rental> rentals = rentalDao.findAll();
+           
+             for(Rental rent :rentals) {
+            	  System.out.println("buraya baaaaakkkk"+rent.getBook().getId());
+            	 if((rent.getBook().getId()==id)
+            			 && (rent.getTeslim_tarihi().getTime() >= rental.getTeslim_tarihi().getTime())
+            			 && (rent.getAlis_tarih().getTime()<=rental.getAlis_tarih().getTime())) {
+            		 return new ErrorResult("Seçilen tarihler arasında kitap kirada");
+            	 }
+            	 
+             }
+             
+             return new SuccessResult("Kitap başarıyla kiralandı.");
+         
+     }*/
 }

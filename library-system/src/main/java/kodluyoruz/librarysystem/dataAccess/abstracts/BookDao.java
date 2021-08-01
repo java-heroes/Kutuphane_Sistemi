@@ -24,7 +24,5 @@ public interface BookDao extends JpaRepository<Book, Integer> {
     		+" Inner Join b.writer w")
     	List<BookWithCategoryAndWriterDto> getBookWithDetail();
     
-    //@Modifying
-    @Query("FROM Book b GROUP BY b.rentals.book ORDER BY b.rentals.book  DESC")
-    List<Book> getMostReaded();
+    
 }

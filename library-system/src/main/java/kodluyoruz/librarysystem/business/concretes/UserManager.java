@@ -10,13 +10,11 @@ import org.springframework.stereotype.Service;
 
 import kodluyoruz.librarysystem.business.abstracts.RoleService;
 import kodluyoruz.librarysystem.business.abstracts.UserService;
-<<<<<<< HEAD
+
 import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
 import kodluyoruz.librarysystem.core.utilities.Results.SuccessDataResult;
-=======
 import kodluyoruz.librarysystem.core.utilities.Results.Result;
 import kodluyoruz.librarysystem.core.utilities.Results.SuccessResult;
->>>>>>> 0c5ff147c80b8dab99d581804345fd061ac9f261
 import kodluyoruz.librarysystem.dataAccess.abstracts.UserDao;
 import kodluyoruz.librarysystem.entities.concretes.Role;
 import kodluyoruz.librarysystem.entities.concretes.User;

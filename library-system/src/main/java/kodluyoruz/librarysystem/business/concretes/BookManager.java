@@ -135,7 +135,8 @@ public class BookManager implements BookService {
 	@Override
 	public DataResult<List<Book>> getMostReaded() {
 		// TODO Auto-generated method stub
-		return new SuccessDataResult<List<Book>>(this.bookDao.getMostReaded(),"en çok okunanlar listesi");
+		Sort sort = Sort.by(Sort.Direction.DESC, "rentNum");
+		return new SuccessDataResult<List<Book>>(this.bookDao.findAll(sort),"en çok okunanlar listesi");
 		
 	}
 

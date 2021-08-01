@@ -1,13 +1,13 @@
 package kodluyoruz.librarysystem.api.controllers;
 
-<<<<<<< HEAD
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.validation.Valid;
-=======
+
 import java.util.List;
->>>>>>> 0c5ff147c80b8dab99d581804345fd061ac9f261
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +25,13 @@ import org.springframework.web.bind.annotation.*;
 import kodluyoruz.librarysystem.business.abstracts.UserService;
 import kodluyoruz.librarysystem.config.TokenProvider;
 import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
-<<<<<<< HEAD
+
 import kodluyoruz.librarysystem.core.utilities.Results.ErrorDataResult;
-=======
+
 import kodluyoruz.librarysystem.core.utilities.Results.Result;
 import kodluyoruz.librarysystem.core.utilities.Results.SuccessDataResult;
 import kodluyoruz.librarysystem.entities.concretes.Book;
->>>>>>> 0c5ff147c80b8dab99d581804345fd061ac9f261
+
 import kodluyoruz.librarysystem.entities.concretes.User;
 import kodluyoruz.librarysystem.entities.dtos.AuthToken;
 import kodluyoruz.librarysystem.entities.dtos.LoginUser;
@@ -83,19 +83,6 @@ public class UserController {
         return "Any User Can Read This";
     }
 
-<<<<<<< HEAD
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDataResult<Object>handleValidationException(MethodArgumentNotValidException exceptions){
-    	Map<String,String> validationErrors=new HashMap<String,String>();
-        for(FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
-        	validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
-        	
-        }
-      ErrorDataResult<Object> errors=new ErrorDataResult<Object>(validationErrors,"Validations errors");
-      return errors;
-    }
-=======
     //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update")
     public Result update(@RequestBody UserDto user) {
@@ -104,8 +91,8 @@ public class UserController {
     
     @GetMapping("/getAll")
     public DataResult<List<User>> getAll() {
-    	return new SuccessDataResult<List<User>>(this.userService.findAll());
+    	return this.userService.findAll();
     }
     
->>>>>>> 0c5ff147c80b8dab99d581804345fd061ac9f261
+
 }

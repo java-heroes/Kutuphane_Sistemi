@@ -64,6 +64,10 @@ public class Book {
     private int number_of_pages;
     @Column(name = "is_rent")
     private boolean isRent;
+    
+    @Column(name="rent_num")
+    private int rentNum;
+    
     @JsonIgnoreProperties({"books"})
     @ManyToOne()
     @JoinColumn(name = "category_id")

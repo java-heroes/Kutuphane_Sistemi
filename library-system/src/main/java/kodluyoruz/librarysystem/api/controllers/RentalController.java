@@ -3,6 +3,9 @@ package kodluyoruz.librarysystem.api.controllers;
 import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
 import kodluyoruz.librarysystem.core.utilities.Results.Result;
 import kodluyoruz.librarysystem.core.utilities.Results.SuccessResult;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +41,8 @@ public class RentalController {
 
     }
 
-    @GetMapping("/getUserRentals/{id}")
-    public DataResult<?> getRentalByUserId(@PathVariable int id) {
+    @GetMapping("/getrentalbyid/{id}")
+    public DataResult<List<Rental>> getRentalByUserId(@PathVariable int id) {
         return this.rentalService.getByUserId(id);
     }
 }

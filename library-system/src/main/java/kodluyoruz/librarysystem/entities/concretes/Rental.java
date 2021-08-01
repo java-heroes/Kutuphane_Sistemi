@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.sql.Date;
 
 @Entity
 @Data
@@ -28,6 +30,7 @@ public class Rental {
     @Column(name = "delivery_date")
     private Date teslim_tarihi;
 
+    
     @ManyToOne()
     @JoinColumn(name = "book_id")
     private Book book;

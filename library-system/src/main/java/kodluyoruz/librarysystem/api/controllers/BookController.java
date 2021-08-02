@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -88,14 +89,14 @@ public class BookController {
         //System.out.println(id);
         return this.bookService.getByBookNameContains(name);
     }
-
+   // @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public Result add(@Valid @RequestBody Book book) {
         return this.bookService.addBook(book);
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update")
-    public Result update(@RequestBody Book book) {
+    public Result update(@Valid @RequestBody Book book) {
         return this.bookService.update(book);
     }
 
@@ -105,8 +106,5 @@ public class BookController {
 
     }
 
-  //Sistemde bir exception oluşursa bu methodu çağır demek.
-  //Hataları exceptions parametresi olarak verdik
-  //hataları map e ekle ve dondur.
 
 }

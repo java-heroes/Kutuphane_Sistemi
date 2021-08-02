@@ -93,7 +93,7 @@ public class BookManager implements BookService {
         return new SuccessDataResult<Book>(bookDao.getById(id));
     }
 
-    public Result NullControl(Book book) {
+    /*public Result NullControl(Book book) {
         if (book.getName() == null
                 || book.getNumber_of_pages() == 0
                 || book.getPublishDate() == null
@@ -104,7 +104,7 @@ public class BookManager implements BookService {
         }
         return new SuccessResult();
 
-    }
+    }*/
 
     public Result CheckIfNameExist(String name) {
         List<Book> books = bookDao.findAll();

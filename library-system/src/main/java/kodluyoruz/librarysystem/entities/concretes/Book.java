@@ -34,7 +34,6 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "rentals"})
 public class Book {
 
-    //private static final long serialVersionUID=1l;
     
 	//validation için,   
 	//@Size(min=2, max=30)
@@ -52,6 +51,8 @@ public class Book {
     @NotBlank
     @Size(min=2, max=30)
     private String name;
+    @NotNull
+    @NotBlank
     @Column(name = "description")
     private String description;
     @Column(name = "barcode_no")

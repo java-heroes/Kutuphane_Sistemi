@@ -16,6 +16,9 @@ import kodluyoruz.librarysystem.core.utilities.Results.ErrorDataResult;
 @RestControllerAdvice
 public class RestExceptionHandler {
 
+	  //Sistemde bir exception oluşursa bu methodu çağır demek.
+	  //Hataları exceptions parametresi olarak verdik
+	  //hataları map e ekle ve dondur.
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	  @ResponseStatus(HttpStatus.BAD_REQUEST)
 	  public ErrorDataResult<Object>handleValidationException(MethodArgumentNotValidException exceptions){

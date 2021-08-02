@@ -17,5 +17,5 @@ public interface WriterService {
 
     Result delete(Integer id);
 
-    DataResult<List<Writer>> getByWriterName(String writerName);
+    DataResult<Writer> getByWriterName(String writerName);
 }

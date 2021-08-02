@@ -46,13 +46,13 @@ public class WriterController {
     }
 
     @GetMapping("/getbywritername")
-    public DataResult<List<Writer>> getByWriterName(@RequestParam String writerName) {
+    public DataResult<Writer> getByWriterName(@RequestParam String writerName) {
         //System.out.println(id);
         return this.writerService.getByWriterName(writerName);
     }
 
     @PostMapping("/add")
-    public Result add(@Valid @RequestBody Writer writer) {
+    public Result add( @RequestBody Writer writer) {
         return this.writerService.addWriter(writer);
     }
 
@@ -60,16 +60,5 @@ public class WriterController {
     public Result delete(@PathVariable int id) {
         return this.writerService.delete(id);
        }
-    
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDataResult<Object>handleValidationException(MethodArgumentNotValidException exceptions){
-    	Map<String,String> validationErrors=new HashMap<String,String>();
-        for(FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
-        	validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
-        	
-        }
-      ErrorDataResult<Object> errors=new ErrorDataResult<Object>(validationErrors,"Validations errors");
-      return errors;
-    }
+  
 }

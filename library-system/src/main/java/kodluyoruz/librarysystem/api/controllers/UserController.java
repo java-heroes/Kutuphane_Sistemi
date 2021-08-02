@@ -66,24 +66,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public DataResult<User> saveUser(@Valid @RequestBody UserDto user) {
+    public DataResult<User> saveUser(@RequestBody UserDto user) {
         return userService.save(user);
     }
 
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/adminping", method = RequestMethod.GET)
-    public String adminPing() {
-        return "Only Admins Can Read This";
-    }
-
-    @PreAuthorize("hasRole('USER')")
-    @RequestMapping(value = "/userping", method = RequestMethod.GET)
-    public String userPing() {
-        return "Any User Can Read This";
-    }
-
-    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update")
     public Result update(@RequestBody UserDto user) {
         return this.userService.update(user);

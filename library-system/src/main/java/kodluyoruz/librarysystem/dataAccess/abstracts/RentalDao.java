@@ -9,5 +9,7 @@ import kodluyoruz.librarysystem.entities.concretes.Rental;
 import kodluyoruz.librarysystem.entities.concretes.User;
 
 public interface RentalDao extends JpaRepository<Rental, Integer> {
-	List<Rental> getByUser_Id(int userId);
+
+	List<Rental> getByUser_Id(int id);
+
 }

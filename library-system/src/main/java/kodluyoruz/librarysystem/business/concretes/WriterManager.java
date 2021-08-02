@@ -35,7 +35,7 @@ public class WriterManager implements WriterService {
 
     @Override
     public Result addWriter(Writer writer) {
-        Result result = BusinessRules.Run(NullControl(writer),
+        Result result = BusinessRules.Run(
                 CheckIfNameExist(writer.getName()));
         if (result != null) {
             return result;
@@ -72,12 +72,12 @@ public class WriterManager implements WriterService {
     public Result delete(Integer id) {
         String writer = writerDao.getById(id).getName();
         writerDao.deleteById(id);
-        return new SuccessDataResult(writer+"adlı yazar silindi");
+        return new SuccessResult(writer+" adlı yazar silindi");
     }
 
     @Override
-    public DataResult<List<Writer>> getByWriterName(String writerName) {
-        return new SuccessDataResult<List<Writer>>((List<Writer>) writerDao.getByName(writerName),writerName+"'in kitap listesi");
+    public DataResult<Writer> getByWriterName(String writerName) {
+        return new SuccessDataResult<Writer>( writerDao.getByName(writerName),writerName+" 'in kitap listesi");
     }
 
 

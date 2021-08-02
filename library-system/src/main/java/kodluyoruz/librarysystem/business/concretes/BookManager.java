@@ -14,18 +14,21 @@ import kodluyoruz.librarysystem.core.utilities.Results.Result;
 import kodluyoruz.librarysystem.core.utilities.Results.SuccessDataResult;
 import kodluyoruz.librarysystem.core.utilities.Results.SuccessResult;
 import kodluyoruz.librarysystem.dataAccess.abstracts.BookDao;
+import kodluyoruz.librarysystem.dataAccess.abstracts.RentalDao;
 import kodluyoruz.librarysystem.entities.concretes.Book;
+import kodluyoruz.librarysystem.entities.concretes.Rental;
+import kodluyoruz.librarysystem.entities.dtos.BookWithCategoryAndWriterDto;
 
 @Service
 public class BookManager implements BookService {
 
     private BookDao bookDao;
-
+    private RentalDao rentalDao;
     @Autowired
-    public BookManager(BookDao bookDao) {
+    public BookManager(BookDao bookDao,RentalDao rentalDao) {
         super();
         this.bookDao = bookDao;
-    }
+        this.rentalDao=rentalDao;  }
 
     @Override
     public DataResult<List<Book>> getAll() {
@@ -35,7 +38,7 @@ public class BookManager implements BookService {
 
     @Override
     public Result addBook(Book book) {
-        Result result = BusinessRules.Run(NullControl(book),
+        Result result = BusinessRules.Run(
                 CheckIfNameExist(book.getName()));
         if (result != null) {
             return result;
@@ -90,7 +93,7 @@ public class BookManager implements BookService {
         return new SuccessDataResult<Book>(bookDao.getById(id));
     }
 
-    public Result NullControl(Book book) {
+    /*public Result NullControl(Book book) {
         if (book.getName() == null
                 || book.getNumber_of_pages() == 0
                 || book.getPublishDate() == null
@@ -101,7 +104,7 @@ public class BookManager implements BookService {
         }
         return new SuccessResult();
 
-    }
+    }*/
 
     public Result CheckIfNameExist(String name) {
         List<Book> books = bookDao.findAll();
@@ -112,6 +115,30 @@ public class BookManager implements BookService {
         }
         return new SuccessResult();
     }
+
+    @Override
+	public DataResult<List<BookWithCategoryAndWriterDto>> getBookWithDetail() {
+		// TODO Auto-generated method stub
+		
+		return new SuccessDataResult<List<BookWithCategoryAndWriterDto>>(this.bookDao.getBookWithDetail(),"details listed");
+	}
+
+	@Override
+	public DataResult<List<Book>> getTheNewest() {
+		// TODO Auto-generated method stub
+		Sort sort = Sort.by(Sort.Direction.DESC, "publishDate");
+
+        return new SuccessDataResult<List<Book>>(bookDao.findAll(sort), "En Yeniler Listesi");
+		
+	}
+
+	@Override
+	public DataResult<List<Book>> getMostReaded() {
+		// TODO Auto-generated method stub
+		Sort sort = Sort.by(Sort.Direction.DESC, "rentNum");
+		return new SuccessDataResult<List<Book>>(this.bookDao.findAll(sort),"en çok okunanlar listesi");
+		
+	}
 
 
 }

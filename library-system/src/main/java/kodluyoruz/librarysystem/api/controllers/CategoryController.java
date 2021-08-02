@@ -2,6 +2,8 @@ package kodluyoruz.librarysystem.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,13 +41,13 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Category category) {
+    public Result add(@Valid @RequestBody Category category) {
         return this.categoryService.add(category);
 
     }
 
     @PostMapping("/update")
-    public Result update(@RequestBody Category category) {
+    public Result update(@Valid @RequestBody Category category) {
         return this.categoryService.update(category);
 
     }

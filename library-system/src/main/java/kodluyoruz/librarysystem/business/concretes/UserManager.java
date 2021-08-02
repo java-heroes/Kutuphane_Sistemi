@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import kodluyoruz.librarysystem.business.abstracts.RoleService;
 import kodluyoruz.librarysystem.business.abstracts.UserService;
+
+import kodluyoruz.librarysystem.core.utilities.Results.DataResult;
+import kodluyoruz.librarysystem.core.utilities.Results.SuccessDataResult;
 import kodluyoruz.librarysystem.core.utilities.Results.Result;
 import kodluyoruz.librarysystem.core.utilities.Results.SuccessResult;
 import kodluyoruz.librarysystem.dataAccess.abstracts.UserDao;
@@ -52,19 +55,19 @@ public class UserManager implements UserDetailsService, UserService {
         return authorities;
     }
 
-    public List<User> findAll() {
+    public DataResult<List<User>> findAll() {
         List<User> list = new ArrayList<>();
         userDao.findAll().iterator().forEachRemaining(list::add);
-        return list;
+        return new SuccessDataResult<>(list);
     }
 
     @Override
-    public User findOne(String username) {
-        return userDao.findByUsername(username);
+    public DataResult<User> findOne(String username) {
+        return new SuccessDataResult<User>(userDao.findByUsername(username));
     }
 
     @Override
-    public User save(UserDto user) {
+    public DataResult<User> save(UserDto user) {
 
         User nUser = user.getUserFromDto();
         nUser.setPassword(bcryptEncoder.encode(user.getPassword()));
@@ -79,7 +82,7 @@ public class UserManager implements UserDetailsService, UserService {
         }
 
         nUser.setRoles(roleSet);
-        return userDao.save(nUser);
+        return new SuccessDataResult<User>(userDao.save(nUser));
     }
 
 	@Override

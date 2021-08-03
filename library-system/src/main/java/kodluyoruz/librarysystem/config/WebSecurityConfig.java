@@ -46,11 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/users/*", "/users/authenticate",
                         "/users/register",
-                      //  "/books/*",
+                        "/books/**",
                         "/rent/**" ,
                         "/categories/*",
                         "/writers/*").permitAll()
-                .antMatchers("/books/add*").hasRole("ADMIN")
+                //.antMatchers("/books/add*").hasRole("ADMIN")
     			//.antMatchers("/books/*").hasRole("USER")
     			
                 .antMatchers("/v2/api-docs",

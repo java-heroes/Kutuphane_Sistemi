@@ -18,4 +18,5 @@ public interface RentalService {
     Result delete(Integer id);
     
     DataResult<List<Rental>> getByUserId(Integer id);
+    DataResult<List<Rental>> getByUserName(String username);
 }

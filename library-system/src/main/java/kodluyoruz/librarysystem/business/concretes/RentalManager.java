@@ -73,6 +73,13 @@ public class RentalManager implements RentalService {
 	public DataResult<List<Rental>> getByUserId(Integer id) {		
 		return new SuccessDataResult<List<Rental>>(this.rentalDao.getByUser_Id(id), "Listeleme başarılı");
 	}
+
+
+	@Override
+	public DataResult<List<Rental>> getByUserName(String username) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<Rental>>(this.rentalDao.getByUser_Username(username),"Listeleme başarılı");	
+		}
 	
 	/*public Result IsRentable(Rental rental,int id){
         

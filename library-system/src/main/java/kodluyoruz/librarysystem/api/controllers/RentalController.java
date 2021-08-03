@@ -42,7 +42,11 @@ public class RentalController {
     }
 
     @GetMapping("/getrentalbyid/{id}")
-    public DataResult<List<Rental>> getRentalByUserId(@PathVariable int id) {
+    public DataResult<List<Rental>> getRentalByUserId(@PathVariable("id") int id) {
         return this.rentalService.getByUserId(id);
+    }
+    @GetMapping("/getrentalbyusername")
+    public DataResult<List<Rental>> getRentalByUsername(@RequestParam String username) {
+        return this.rentalService.getByUserName(username);
     }
 }

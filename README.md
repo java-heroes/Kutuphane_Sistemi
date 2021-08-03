@@ -5,6 +5,8 @@ Spring Boot ve Katmanlı Mimari ile Kütüphane Takip Sistemi oluşturuldu.
 - Java
 - Spring Framework
 - PostgreSql
+- Spring JPA with Hibernate
+- Spring Security
 ---------------------------------------------------
 
 Sisteme, üye ve kütüphane admini olmak üzere iki tür kullanıcı giriş yapabilir. 

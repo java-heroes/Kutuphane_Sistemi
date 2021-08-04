@@ -29,7 +29,7 @@ public class WriterManager implements WriterService {
     }
 
     @Override
-    public DataResult<List<Writer>> getById(int id) {
+    public DataResult<List<Writer>>getById(int id) {
         return new SuccessDataResult<List<Writer>>(writerDao.getById(id));
     }
 

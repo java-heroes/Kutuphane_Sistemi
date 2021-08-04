@@ -26,10 +26,13 @@ public class Writer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
+    @NotBlank
     @Column(name = "name")
-  
     private String name;
 
+    @NotNull
+    @NotBlank
     @Column(name = "surname")
     private String surname;
 

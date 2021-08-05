@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -77,7 +78,7 @@ public class Book {
     @ManyToOne()
     @JoinColumn(name = "writer_id")
     Writer writer;
-
+   
     @OneToMany(mappedBy = "book")
     private List<Rental> rentals;
 }

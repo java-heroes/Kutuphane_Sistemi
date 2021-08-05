@@ -23,7 +23,7 @@ public class UserDto {
     private String email;
 	@NotNull
 	@NotBlank
-	@Pattern(regexp="(^$|[0-9]{11})",message="telefonu düzgün yazsana!")
+	@Pattern(regexp="(^$|[0-9]{12})",message="telefonu düzgün yazsana!")
     private String phone;
 	@NotNull
 	@NotBlank

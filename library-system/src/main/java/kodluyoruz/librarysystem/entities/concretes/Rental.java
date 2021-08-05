@@ -7,9 +7,12 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -24,9 +27,15 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull(message = "Alış tarihi boş bırakılamaz")
+    @NotBlank
+    @DateTimeFormat
     @Column(name = "receive_date")
     private Date alis_tarih;
 
+    @NotBlank
+    @NotNull(message = "Teslim tarihi boş bırakılamaz")
+    @DateTimeFormat
     @Column(name = "delivery_date")
     private Date teslim_tarihi;
 

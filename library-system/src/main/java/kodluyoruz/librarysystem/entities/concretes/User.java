@@ -40,22 +40,34 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
+    @NotNull(message = "Kullanıcı adı boş bırakılamaz")
+    @NotBlank
     @Column(name = "username")
     private String username;
 
+    @NotNull(message = "Şifre boş bırakılamaz")
+    @NotBlank
     @Column(name = "password")
     @JsonIgnore
     private String password;
 
+    @NotNull(message = "Mail alanı doldurulmak zorunda")
+    @NotBlank
+    @Email
     @Column(name = "email")
     private String email;
 
-    
+    @NotNull(message = "Telefon no doldurulmak zorunda 12 hane")
+    @NotBlank
+    @Pattern(regexp ="[0-9\\s]{12}")
     @Column(name = "phone")
     private String phone;
 
+    @NotNull(message = "İsim alanı boş bırakılamaz")
+    @NotBlank
     @Column(name = "name")
     private String name;
+
 
     @OneToMany(mappedBy = "user")
     private List<Rental> rentals;

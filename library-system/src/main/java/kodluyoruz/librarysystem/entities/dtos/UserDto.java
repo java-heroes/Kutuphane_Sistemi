@@ -11,7 +11,6 @@ import lombok.Data;
 @Data
 public class UserDto {
 	@NotNull
-	@NotBlank
     private int id;
 	@NotNull
 	@NotBlank
@@ -25,7 +24,7 @@ public class UserDto {
     private String email;
 	@NotNull
 	@NotBlank
-	@Pattern(regexp="(^$|[0-9]{12})",message="telefonu düzgün yazsana!")
+	@Pattern(regexp="(^$|[0-9]{12})",message="Telefon no doldurulmak zorunda 12 hane olmalı")
     private String phone;
 	@NotNull
 	@NotBlank

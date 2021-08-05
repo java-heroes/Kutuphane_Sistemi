@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public DataResult<User> saveUser(@RequestBody UserDto user) {
+    public DataResult<User> saveUser(@Valid @RequestBody UserDto user) {
         return userService.save(user);
     }
 

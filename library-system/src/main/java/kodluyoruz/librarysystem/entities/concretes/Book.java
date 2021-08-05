@@ -35,41 +35,43 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "rentals"})
 public class Book {
 
-    
-	//validation için,   
-	//@Size(min=2, max=30)
-	 //@Email
-	 //   @NotNull
-	 //   @NotBlank
-	//@Pattern(regexp ="[0-9\\s]{12}") telefon için kullan
-	
+
+    //validation için,
+    //@Size(min=2, max=30)
+    //@Email
+    //   @NotNull
+    //   @NotBlank
+    //@Pattern(regexp ="[0-9\\s]{12}") telefon için kullan
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(name = "book_name")
-    @NotNull
+    @NotNull(message = "kitap adı boş bırakılamaz")
     @NotBlank
-    @Size(min=2, max=30)
+    @Size(min = 2, max = 30)
     private String name;
-    @NotNull
+
+    @NotNull(message = "açıklama boş bırakılamaz")
     @NotBlank
     @Column(name = "description")
     private String description;
     @Column(name = "barcode_no")
-    @NotNull
+    @NotNull(message = "barkod no boş bırakılamaz")
     private int barcode_no;
     @Column(name = "publish_date")
     private Date publishDate;
-    @Min(value = 50,message="kitap sayfası 50 den az olamaz.")
+    @Min(value = 50, message = "kitap sayfası 50 den az olamaz.")
     @Column(name = "number_of_pages")
     private int number_of_pages;
     @Column(name = "is_rent")
     private boolean isRent;
-    
-    @Column(name="rent_num")
+
+    @Column(name = "rent_num")
     private int rentNum;
-    
+
     @JsonIgnoreProperties({"books"})
     @ManyToOne()
     @JoinColumn(name = "category_id")

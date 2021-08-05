@@ -26,12 +26,12 @@ public class Writer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "Yazar adı boş bırakılamaz")
     @NotBlank
     @Column(name = "name")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Yazar soyadı boş bırakılamaz")
     @NotBlank
     @Column(name = "surname")
     private String surname;

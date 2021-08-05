@@ -81,6 +81,7 @@ public class Book {
     @JoinColumn(name = "writer_id")
     Writer writer;
    
+    @JsonIgnore
     @OneToMany(mappedBy = "book")
     private List<Rental> rentals;
 }

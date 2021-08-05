@@ -14,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -38,6 +39,7 @@ public class Category {
     @Size(min=2, max=30)
     private String categoryName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Book> books;
 

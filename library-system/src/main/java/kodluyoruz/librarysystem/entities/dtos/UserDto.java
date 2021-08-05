@@ -10,7 +10,9 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-    
+	@NotNull
+	@NotBlank
+    private int id;
 	@NotNull
 	@NotBlank
     private String username;
@@ -38,7 +40,7 @@ public class UserDto {
         user.setEmail(email);
         user.setPhone(phone);
         user.setName(name);
-        
+        user.setId(id);
         return user;
     }
 }

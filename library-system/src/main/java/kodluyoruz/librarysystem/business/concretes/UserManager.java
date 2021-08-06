@@ -88,15 +88,31 @@ public class UserManager implements UserDetailsService, UserService {
 	@Override
 	public Result update(UserDto user) {
 		
-		User dtoUser = user.getUserFromDto();
+		/*User dtoUser =new User();
+		dtoUser.setId(user.getId());
 		dtoUser.setUsername(user.getUsername());
 		dtoUser.setEmail(user.getEmail());
 		dtoUser.setName(user.getName());
-		dtoUser.setPassword(user.getPassword());
+		dtoUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		dtoUser.setPhone(user.getPhone());
 		this.userDao.save(dtoUser);
 		
-		return new SuccessResult("Kullanıcı başarıyla güncellendi");
+		return new SuccessResult("Kullanıcı başarıyla güncellendi");*/
+		
+		   User nUser = user.getUserFromDto();
+	        nUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+
+	        Role role = roleService.findByName("USER");
+	        Set<Role> roleSet = new HashSet<>();
+	        roleSet.add(role);
+
+	        if (nUser.getEmail().split("@")[1].equals("admin.edu")) {
+	            role = roleService.findByName("ADMIN");
+	            roleSet.add(role);
+	        }
+
+	        nUser.setRoles(roleSet);
+	        return new SuccessDataResult<User>(userDao.save(nUser));
 	}
 
 	@Override

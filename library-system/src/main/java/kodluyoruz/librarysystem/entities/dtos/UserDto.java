@@ -10,7 +10,8 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-    
+	@NotNull
+    private int id;
 	@NotNull
 	@NotBlank
     private String username;
@@ -23,7 +24,7 @@ public class UserDto {
     private String email;
 	@NotNull
 	@NotBlank
-	@Pattern(regexp="(^$|[0-9]{12})",message="telefonu düzgün yazsana!")
+	@Pattern(regexp="(^$|[0-9]{12})",message="Telefon no doldurulmak zorunda 12 hane olmalı")
     private String phone;
 	@NotNull
 	@NotBlank
@@ -38,7 +39,7 @@ public class UserDto {
         user.setEmail(email);
         user.setPhone(phone);
         user.setName(name);
-        
+        user.setId(id);
         return user;
     }
 }

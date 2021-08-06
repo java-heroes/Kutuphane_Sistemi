@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +37,7 @@ public class Writer {
     @Column(name = "surname")
     private String surname;
 
+     @JsonIgnore
     @OneToMany(mappedBy = "writer")
     private List<Book> books;
 

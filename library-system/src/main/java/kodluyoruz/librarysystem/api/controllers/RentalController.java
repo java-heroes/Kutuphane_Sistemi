@@ -40,6 +40,10 @@ public class RentalController {
        return this.rentalService.delete(id);
 
     }
+    @PutMapping("/update")
+    public Result update(@RequestBody Rental rental){
+           return  this.rentalService.update(rental);
+    }
 
     @GetMapping("/getrentalbyid/{id}")
     public DataResult<List<Rental>> getRentalByUserId(@PathVariable("id") int id) {
